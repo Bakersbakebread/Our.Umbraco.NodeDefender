@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.Options;
-using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Security;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Extensions;
 
 namespace NodeDefender.Handlers
 {
@@ -16,8 +17,9 @@ namespace NodeDefender.Handlers
         private readonly DenyOptions _denyOptionsDuplicate;
 
         public ContentSavingHandler(IOptions<NodeDefenderSettings> settings,
-                                    IBackOfficeSecurityAccessor backOfficeSecurityAccessor)
-            : base(settings, backOfficeSecurityAccessor)
+                                    IBackOfficeSecurityAccessor backOfficeSecurityAccessor,
+                                    IContentTypeService contentTypeService)
+            : base(settings, backOfficeSecurityAccessor, contentTypeService)
         {
             _denyOptionsDuplicate = settings.Value.DenyDuplicate;
             _denyOptionsRename = settings.Value.DenyRename;
@@ -40,10 +42,23 @@ namespace NodeDefender.Handlers
         private void HandleDuplicate(IContentBase node, ContentSavingNotification notification)
         {
             var errorMessage = GetDuplicateErrorMessage();
-
+            
             if (_denyOptionsDuplicate.DoctypeAliases is not null
                 && _denyOptionsDuplicate.DoctypeAliases.Contains(node.ContentType.Alias))
                 notification.CancelOperation(errorMessage);
+            
+            if (_denyOptionsDuplicate.NodeKeys is not null
+                && _denyOptionsDuplicate.NodeKeys.Contains(node.GetUdi().ToString()))
+                notification.CancelOperation(errorMessage);
+
+            if (_denyOptionsDuplicate.CompositionAliases is not null)
+            {
+                var contentType = ContentTypeService.Get(node.ContentTypeId);
+                var compositions = contentType.CompositionAliases();
+
+                if (compositions.Any(x => _denyOptionsDuplicate.CompositionAliases.Contains(x)))
+                    notification.CancelOperation(errorMessage);
+            }
 
             if (_denyOptionsDuplicate.NodeIds is not null
                 && _denyOptionsDuplicate.NodeIds.Contains(node.Id))
@@ -61,6 +76,20 @@ namespace NodeDefender.Handlers
             if (_denyOptionsRename.DoctypeAliases is not null
                 && _denyOptionsRename.DoctypeAliases.Contains(node.ContentType.Alias))
                 notification.CancelOperation(errorMessage);
+            
+            if (_denyOptionsRename.CompositionAliases is not null)
+            {
+                var contentType = ContentTypeService.Get(node.ContentTypeId);
+                var compositions = contentType.CompositionAliases();
+            
+                if (compositions.Any(x => _denyOptionsRename.CompositionAliases.Contains(x)))
+                    notification.CancelOperation(errorMessage);
+            }
+            
+            if (_denyOptionsRename.NodeKeys is not null
+                && _denyOptionsRename.NodeKeys.Contains(node.Key.ToString()))
+                notification.CancelOperation(errorMessage);
+
 
             if (_denyOptionsRename.NodeIds is not null
                 && _denyOptionsRename.NodeIds.Contains(node.Id))

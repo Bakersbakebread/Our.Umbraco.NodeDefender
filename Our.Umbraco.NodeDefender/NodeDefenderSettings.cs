@@ -17,7 +17,9 @@ namespace NodeDefender
     {
         public string[] DoctypeAliases { get; set; }
 
+        public string[] CompositionAliases { get; set; }
         public int[] NodeIds { get; set; }
+        public string[] NodeKeys { get; set; }
 
         public ErrorMessage Message { get; set; }
     }

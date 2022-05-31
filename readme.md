@@ -28,6 +28,14 @@ DenyRename, DenyDuplicate and DenyDelete all share the same structure
   "NodeIds": [
     1234
   ],
+  // an array of specific node keys (as string)
+  "NodeKeys: [
+    "093b6805-db05-4510-96ac-e5ee8357d5e8"
+  ],
+  // an array of composition aliases 
+  "CompositionAliases": [
+    "myAwesomeComposition"
+  ],
   // The error message to send
   "Message": {
     "Category": "Error",
@@ -49,6 +57,12 @@ DenyRename, DenyDuplicate and DenyDelete all share the same structure
       ],
       "NodeIds": [
         1234
+      ],
+      "NodeKeys: [
+        "093b6805-db05-4510-96ac-e5ee8357d5e8"
+     ],
+     "CompositionAliases": [
+        "myAwesomeComposition"
       ],
       "Message": {
         "Category": "Error",

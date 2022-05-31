@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Security;
+using Umbraco.Cms.Core.Services;
 
 namespace NodeDefender.Handlers
 {
@@ -12,9 +13,11 @@ namespace NodeDefender.Handlers
     {
         private readonly DenyOptions _denyOptionsDeleting;
 
+
         public ContentMovingToRecycleBinHandler(IOptions<NodeDefenderSettings> settings,
-                                                IBackOfficeSecurityAccessor backOfficeSecurityAccessor)
-            : base(settings, backOfficeSecurityAccessor)
+                                                IBackOfficeSecurityAccessor backOfficeSecurityAccessor,
+                                                IContentTypeService contentTypeService)
+            : base(settings, backOfficeSecurityAccessor, contentTypeService)
         {
             _denyOptionsDeleting = settings.Value.DenyDelete;
         }
@@ -32,6 +35,19 @@ namespace NodeDefender.Handlers
                 if (_denyOptionsDeleting.DoctypeAliases is not null
                     && _denyOptionsDeleting.DoctypeAliases.Contains(node.ContentType.Alias))
                     notification.CancelOperation(errorMessage);
+
+                if (_denyOptionsDeleting.NodeKeys is not null
+                    && _denyOptionsDeleting.NodeKeys.Contains(node.Key.ToString()))
+                    notification.CancelOperation(errorMessage);
+
+                if (_denyOptionsDeleting.CompositionAliases is not null)
+                {
+                    var contentType = ContentTypeService.Get(node.Id);
+                    var compositions = contentType.CompositionAliases();
+
+                    if (compositions.Any(x => _denyOptionsDeleting.CompositionAliases.Contains(x)))
+                        notification.CancelOperation(errorMessage);
+                }
 
                 if (_denyOptionsDeleting.NodeIds is not null
                     && _denyOptionsDeleting.NodeIds.Contains(node.Id))
