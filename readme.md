@@ -1,4 +1,26 @@
 
+# Our.Umbraco.NodeDefender
+
+A no-nonsense approach to defending nodes. I often find myself writing the same thing in a lot of projects to prevent editors from renaming a settings node, or moving it to the recycle bin. This package aims to solve that simply.
+
+
+
+The package has no dependencies as is configured in `appsettings.json` thus making it only usable on Umbraco 9+
+
+
+
+
+## Features
+
+- Prevent the duplication of nodes
+- Prevent the renaming of nodes 
+- Prevent the deletion of nodes
+
+
+## Installation
+
+
+    
 ## Usage
 
 To setup the NodeDefender, simply add a section to your `appsettings.json` called `NodeDefender`.
