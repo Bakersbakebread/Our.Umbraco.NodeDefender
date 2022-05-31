@@ -2,7 +2,7 @@ name: publish to nuget
 on:
   push:
     branches:
-      - main 
+      - main
 jobs:
   publish:
     name: build, pack & publish
@@ -10,15 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-       - name: Setup dotnet
-         uses: actions/setup-dotnet@v1
-         with:
-           dotnet-version: '5.0.x'
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
 
       - name: Build
         run:
           dotnet build -c Release "./Our.Umbraco.NodeDefender/Our.Umbraco.NodeDefender.csproj"
-        
+
       - name: Release
         run:
           dotnet pack -c Release --no-build -o out "./Our.Umbraco.NodeDefender/Our.Umbraco.NodeDefender.csproj"
