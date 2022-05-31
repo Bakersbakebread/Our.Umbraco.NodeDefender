@@ -1,0 +1,23 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <PackageTemplateContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\Our.Umbraco.NodeDefender\**\*.*</PackageTemplateContentFilesPath>
+    </PropertyGroup>
+
+    <Target Name="CopyPackageTemplateAssets" BeforeTargets="Build">
+        <ItemGroup>
+            <PackageTemplateContentFiles Include="$(PackageTemplateContentFilesPath)" />
+        </ItemGroup>
+        <Message Text="Copying Our.Umbraco.NodeDefender files: $(PackageTemplateContentFilesPath) - #@(PackageTemplateContentFiles->Count()) files"  Importance="high" />
+        <Copy SourceFiles="@(PackageTemplateContentFiles)" DestinationFiles="@(PackageTemplateContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\Our.Umbraco.NodeDefender\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    </Target>
+
+    <Target Name="ClearPackageTemplateAssets" BeforeTargets="Clean">
+        <ItemGroup>
+            <PackageTemplateDir Include="$(MSBuildProjectDirectory)\App_Plugins\Our.Umbraco.NodeDefender\" />
+        </ItemGroup>
+        <Message Text="Clear old Our.Umbraco.NodeDefender data"  Importance="high" />
+        <RemoveDir Directories="@(PackageTemplateDir)"  />
+    </Target>
+
+</Project>
