@@ -2,6 +2,11 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <RootNamespace>NodeDefender</RootNamespace>
+        <Title>Node Defender</Title>
+        <Authors>Sean Thorne</Authors>
+        <Description>A simple way of defending nodes from modification</Description>
+        <PackageProjectUrl>https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
