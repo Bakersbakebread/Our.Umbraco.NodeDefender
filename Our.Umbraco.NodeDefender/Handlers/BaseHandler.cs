@@ -13,7 +13,7 @@ namespace NodeDefender.Handlers
         public readonly IContentTypeService ContentTypeService;
 
         protected BaseHandler(IOptions<NodeDefenderSettings> settings,
-                              IBackOfficeSecurityAccessor backOfficeSecurityAccessor, 
+                              IBackOfficeSecurityAccessor backOfficeSecurityAccessor,
                               IContentTypeService contentTypeService)
         {
             _backOfficeSecurityAccessor = backOfficeSecurityAccessor;
@@ -25,6 +25,10 @@ namespace NodeDefender.Handlers
         {
             if (_allowedUserGroups is null)
                 return false;
+
+            //  we return true here because if you schedule publish, the validation is done at that point
+            if (_backOfficeSecurityAccessor.BackOfficeSecurity == null)
+                return true;
 
             var user = _backOfficeSecurityAccessor.BackOfficeSecurity.CurrentUser;
             var userGroups = user.Groups;
