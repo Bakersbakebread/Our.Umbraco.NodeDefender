@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>NodeDefender</RootNamespace>
         <Title>Node Defender</Title>
         <Authors>Sean Thorne</Authors>
         <Description>A simple way of defending nodes from modification</Description>
         <PackageProjectUrl>https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender</RepositoryUrl>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.5.0" />
-        <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.5.0" />
+        <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
+        <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
     </ItemGroup>
 
     <ItemGroup>
