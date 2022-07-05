@@ -12,7 +12,7 @@ namespace NodeDefender
         public void Compose(IUmbracoBuilder builder)
         {
             // get all doctypes and node Ids
-            builder.Services.Configure<NodeDefenderSettings>(builder.Config.GetSection("NodeDefender"));
+            builder.Services.Configure<NodeDefenderSettings>(builder.Config.GetSection(NodeDefenderSettings.NodeDefender));
 
             builder.AddNotificationHandler<ContentSavingNotification, ContentSavingHandler>();
             builder.AddNotificationHandler<ContentMovingToRecycleBinNotification, ContentMovingToRecycleBinHandler>();
