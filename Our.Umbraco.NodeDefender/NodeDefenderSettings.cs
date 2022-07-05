@@ -5,6 +5,8 @@ namespace NodeDefender
 {
     public class NodeDefenderSettings
     {
+        public static string NodeDefender = "NodeDefender"
+        
         public IEnumerable<string> AllowedUserGroups { get; set; }
         public DenyOptions DenyRename { get; set; }
 
