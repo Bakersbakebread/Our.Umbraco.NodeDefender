@@ -1,0 +1,32 @@
+﻿{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "AddOnPackagesRequiredForUmbracoCloud": [],
+  "AlternatePackageNames": [],
+  "AuthorDetails": {
+    "Name": "Sean Thorne",
+    "Description": "Full stack developer, dog dad, and coffee addict.",
+    "Url": "https://seanthorne.co.uk"
+  },
+  "Category": "Editor Tools",
+  "Description": "Protect nodes from being created, renamed or deleted.",
+  "DocumentationUrl": "https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender/blob/main/readme.md",
+  "LicenseTypes": [ "Free" ],
+  "IssueTrackerUrl": "https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender/issues",
+  "PackageType": "Package",
+  "Screenshots": [
+    {
+      "ImageUrl": "https://lh5.googleusercontent.com/dzevwK6lNd5u_d8tDxjbPiibPKx9ikvdz6a9Orbe1yjQHgngTURlbZ02eOSRvXNxQis=w2400",
+      "Caption": "Configurated through appsettings.json"
+    }
+  ],
+  "Tags": [
+    "Node", "Defender", "Protect", "Delete", "Rename", "Create"
+  ],
+  "Title": "Node Defender",
+  "VersionSpecificPackageIds": [
+    {
+      "UmbracoMajorVersion": 10,
+      "PackageId": "NodeDefender"
+    }
+  ],
+}

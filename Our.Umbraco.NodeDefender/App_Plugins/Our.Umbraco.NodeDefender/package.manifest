@@ -1,0 +1,6 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/Our.Umbraco.NodeDefender/js/nodedefender.controller.js",
+    "~/App_Plugins/Our.Umbraco.NodeDefender/js/nodedefender.resource.js",
+  ]
+}
