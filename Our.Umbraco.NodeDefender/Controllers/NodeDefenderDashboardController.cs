@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using NodeDefender.Models;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Web.Common.Attributes;
@@ -10,49 +11,6 @@ using Umbraco.Cms.Web.Common.Controllers;
 
 
 namespace NodeDefender.Controllers;
-
-public class NodeDefenderSettingsDto
-{
-    public List<AllowedUserGroupsDto> AllowedUserGroups { get; set; }
-    public NodeDefenderSettings Raw { get; set; }
-
-    public List<DenyOptionsDto> DenyOptionsDtos { get; set; }
-}
-
-public class AllowedUserGroupsDto
-{
-    public string Name { get; set; }
-    public string Alias { get; set; }
-    public int ID { get; set; }
-    public string Icon { get; set; }
-}
-
-public class DenyOptionsDto
-{
-    public string Type { get; set; }
-    public string Message { get; set; }
-    public List<DoctypeDto> Doctype { get; set; }
-}
-
-public class DoctypeDto
-{
-    public DoctypeDto()
-    {
-    }
-    
-    public DoctypeDto(IContentType content)
-    {
-        HasError = false;
-        Alias = content.Alias;
-        Id = content.Id;
-        Icon = content.Icon;
-    }
-
-    public bool HasError { get; set; }
-    public string Alias { get; set; }
-    public int Id { get; set; }
-    public string Icon { get; set; }
-}
 
 [PluginController("NodeDefender")]
 public class NodeDefenderDashboardController : UmbracoApiController
