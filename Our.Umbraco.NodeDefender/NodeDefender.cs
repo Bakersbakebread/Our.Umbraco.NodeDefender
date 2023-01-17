@@ -16,6 +16,7 @@ namespace NodeDefender
 
             builder.AddNotificationHandler<ContentSavingNotification, ContentSavingHandler>();
             builder.AddNotificationHandler<ContentMovingToRecycleBinNotification, ContentMovingToRecycleBinHandler>();
+            builder.AddNotificationHandler<SendingAllowedChildrenNotification, SendingAllowedChildrenNotificationHandler>();
         }
     }
 }

@@ -7,7 +7,8 @@
         <Description>A simple way of defending nodes from modification</Description>
         <PackageProjectUrl>https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Bakersbakebread/Our.Umbraco.NodeDefender</RepositoryUrl>
-        <PackageVersion>2.0.0</PackageVersion>
+        <PackageVersion>3.0.0</PackageVersion>
+        <PackageTags>umbraco-marketplace</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>

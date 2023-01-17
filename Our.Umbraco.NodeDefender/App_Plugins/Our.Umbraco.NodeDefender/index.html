@@ -1,0 +1,90 @@
+﻿<div ng-controller="NodeDefender as vm">
+    <div id="wrapper">
+        <uui-box headline="Node Defender settings">
+            <pre id="json-container" class="json">{{ vm.settings.Raw | json }}</pre>
+        </uui-box>
+
+        <uui-box headline="Node Defender visualised settings">
+            These are quick access to options currently selected, those higlighted in red indicate there is an error.
+
+            <h5>Allowed user groups.</h5>
+            <p>These are user groups that are ignored by Node Defender, remember, with great power comes great
+                responsibility.</p>
+
+
+            <a ng-repeat="(key, value) in vm.settings.AllowedUserGroups" ng-href="#users/users/group/{{value.ID}}">
+                <uui-ref-node-user name="{{value.Name}}"></uui-ref-node-user>
+            </a>
+
+            <h5>Deny Rename</h5>
+            <p>Nodes which are not allowed to be renamed.</p>
+            <uui-ref-list>
+                <a ng-repeat="(key, value) in vm.denyRename.Doctype"
+                   ng-href="/umbraco#/settings/documentTypes/edit/{{value.Id}}">
+                    <uui-ref-node name="{{value.Alias || value.Id}}" error="{{value.HasError}}">
+                    </uui-ref-node>
+                </a>
+            </uui-ref-list>
+
+            <h5>Deny Duplicate</h5>
+            <p>Nodes which are not allowed to be created more than once.</p>
+            <uui-ref-list>
+                <a ng-repeat="(key, value) in vm.denyDuplicate.Doctype"
+                   ng-href="/umbraco#/settings/documentTypes/edit/{{value.Id}}">
+                    <uui-ref-node-document-type name="{{value.Alias || value.Id}}" ng-attr-error="{{value.HasError === true ? true : undefined}}">
+                        <uui-icon-registry-essential slot="icon">
+                            <uui-icon name="{{value.HasError ? 'info' : 'document' }}"></uui-icon>
+                        </uui-icon-registry-essential>
+                    </uui-ref-node-document-type>
+                </a>
+            </uui-ref-list>
+
+            <h5>Deny Delete</h5>
+            <p>Nodes which are not allowed to be deleted.</p>
+            <uui-ref-list>
+                <a ng-repeat="(key, value) in vm.denyDelete.Doctype"
+                   ng-href="/umbraco#/settings/documentTypes/edit/{{value.Id}}">
+                    <uui-ref-node name="{{value.Alias || value.Id}}" error="{{value.HasError}}">
+                    </uui-ref-node>
+                </a>
+            </uui-ref-list>
+        </uui-box>
+
+    </div>
+</div>
+<style>
+    #wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .disabled {
+        pointer-events: none;
+    }
+
+
+    .json_key, .json_key span {
+        color: #606;
+    }
+
+    .json_string, .json_string span {
+        color: #282;
+    }
+
+    .json_number {
+        color: #009;
+    }
+
+    .json_bool {
+        color: #e00;
+    }
+
+    .json {
+        white-space: pre;
+        font: 14px/1.5 Monaco, MonoSpace;
+    }
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@umbraco-ui/uui@latest/dist/uui.min.js"></script>
